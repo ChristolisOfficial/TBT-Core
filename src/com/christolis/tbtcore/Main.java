@@ -1,8 +1,6 @@
 package com.christolis.tbtcore;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -36,6 +34,11 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
         Bukkit.getPluginManager().registerEvents(this, this);
+
+        // Re-create the TBTPlayer wrapper instances
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            new TBTPlayer(player);
+        });
     }
 
     @Override
@@ -45,6 +48,7 @@ public class Main extends JavaPlugin implements Listener {
         }
 
         gameQueue.games.clear();
+        TBTPlayer.players.clear();
     }
 
     // @ChristolisOfficial: Desperately looking for a better way

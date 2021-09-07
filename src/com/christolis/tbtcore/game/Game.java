@@ -2,9 +2,6 @@ package com.christolis.tbtcore.game;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-
 /**
  * Game.java
  *

@@ -45,7 +45,7 @@ public class Map {
      *
      * Please do note that the original map has to contain
      * a map.yml, otherwise the Map will not be made.
-     *
+    *
      * @param folder A File that points to the original map to be made
      */
     public Map(File folder) throws Exception {
