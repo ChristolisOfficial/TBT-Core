@@ -1,0 +1,35 @@
+apply plugin: 'java'
+compileJava {
+	sourceCompatibility = '1.8'
+	targetCompatibility = '1.8'
+}
+
+configurations {
+	extraLibs
+}
+
+repositories {
+    jcenter()
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile files ('lib/spigot.jar')
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ["./src"]
+		}
+	}
+}
+
+jar {
+	from {
+		configurations.extraLibs.collect {it.isDirectory() ? it : zipTree(it)}
+	}
+	from 'plugin.yml'
+    from 'config.yml'
+}
