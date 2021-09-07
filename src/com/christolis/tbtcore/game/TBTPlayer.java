@@ -49,6 +49,13 @@ public class TBTPlayer {
     }
 
     public static void remove(Player player) {
+        TBTPlayer tbtPlayer = TBTPlayer.find(player);
+        Game game = tbtPlayer.getGame();
+
+        if (tbtPlayer != null && game != null) {
+            game.removePlayer(tbtPlayer);
+        }
+
         players.remove(player);
     }
 }

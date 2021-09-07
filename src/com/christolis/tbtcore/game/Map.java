@@ -120,7 +120,7 @@ public class Map {
             TBTPlayer tbtplayer = TBTPlayer.find(player);
 
             if (tbtplayer != null)
-                tbtplayer.getGame().removePlayer(tbtplayer, false);
+                tbtplayer.getGame().removePlayer(tbtplayer);
         }
 
         WorldControl.unloadWorld(this.world);

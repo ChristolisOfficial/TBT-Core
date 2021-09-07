@@ -24,7 +24,7 @@ public class CommandTBT extends Command {
         if (args.length == 1) {
             if (args[0].toLowerCase().equals("leave")) {
                 if (tbtplayer.getGame() != null) {
-                    tbtplayer.getGame().removePlayer(tbtplayer, true);
+                    tbtplayer.getGame().removePlayer(tbtplayer);
                 } else {
                     player.sendMessage(ChatColor.RED + "You are not in a game!");
                 }

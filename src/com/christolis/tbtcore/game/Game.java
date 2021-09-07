@@ -2,6 +2,9 @@ package com.christolis.tbtcore.game;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
 /**
  * Game.java
  *
@@ -11,6 +14,7 @@ public class Game {
 
     private Map map;
     private final Mode mode;
+    private boolean started;
 
     private int remainingPlayers;
     private final ArrayList<TBTPlayer> players = new ArrayList<>();
@@ -18,6 +22,7 @@ public class Game {
     public Game(Map map, Mode mode) {
         this.map = map; // TODO: Randomly construct map
         this.mode = mode;
+        this.started = false;
         this.remainingPlayers = mode.getMaxPlayers();
     }
 
@@ -27,6 +32,10 @@ public class Game {
 
     public Mode getMode() {
         return mode;
+    }
+
+    public boolean hasStarted() {
+        return started;
     }
 
     public int getRemainingPlayers() {
@@ -45,19 +54,42 @@ public class Game {
             player.setLastLocation(player.getPlayer().getLocation().clone());
             player.getPlayer().teleport(getMap().getCenterLocation());
             this.remainingPlayers--;
+
+            if (!this.hasStarted()) {
+                for (TBTPlayer tbtplayers : this.getPlayers()) {
+                    Player bukkitPlayers = tbtplayers.getPlayer();
+                    String msg = ChatColor.BLUE + player.getPlayer().getName() +
+                        ChatColor.YELLOW + " has joined (" + ChatColor.AQUA +
+                        players.size() + ChatColor.YELLOW + "/" + ChatColor.AQUA +
+                        getMode().getMaxPlayers() + ChatColor.YELLOW + ")!";
+
+                    bukkitPlayers.sendMessage(msg);
+                }
+            }
             return true;
         }
         return false;
     }
 
-    public void removePlayer(TBTPlayer player, boolean freePosition) {
+    public void removePlayer(TBTPlayer player) {
         player.setGame(null);
         getPlayers().remove(player);
 
         player.getPlayer().teleport(player.getLastLocation());
 
-        if (freePosition)
-            this.remainingPlayers++;
+        this.remainingPlayers++;
+
+        if (!this.hasStarted()) {
+            for (TBTPlayer tbtplayers : this.getPlayers()) {
+                Player bukkitPlayers = tbtplayers.getPlayer();
+                String msg = ChatColor.BLUE + player.getPlayer().getName() +
+                    ChatColor.YELLOW + " has left (" + ChatColor.AQUA +
+                    players.size() + ChatColor.YELLOW + "/" + ChatColor.AQUA +
+                    getMode().getMaxPlayers() + ChatColor.YELLOW + ")!";
+
+                bukkitPlayers.sendMessage(msg);
+            }
+        }
     }
 
     /**
