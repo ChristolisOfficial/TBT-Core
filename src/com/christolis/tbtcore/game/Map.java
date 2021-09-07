@@ -39,7 +39,6 @@ public class Map {
     private Location redCage;
     private CuboidArea redScore;
 
-    // plugin_dir/maps/#/map.yml
     /**
      * Constructs a new map and automatically creates
      * a new running instance out of it.
