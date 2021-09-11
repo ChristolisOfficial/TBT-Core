@@ -94,7 +94,7 @@ public class GameQueue {
      * @param game The game for the given mode to be checked against.
      * @return If the modes match.
      */
-    private boolean doModesMatch(final String mode, Game game) {
+    private static boolean doModesMatch(final String mode, Game game) {
         try {
             Class<?> _class = Class.forName(game.getClass().getName());
             if (_class == null) return false;
