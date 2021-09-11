@@ -1,8 +1,8 @@
 package com.christolis.tbtcore.command;
 
 import com.christolis.tbtcore.Main;
+import com.christolis.tbtcore.game.TBGame;
 import com.christolis.tbtcore.game.TBTPlayer;
-import com.christolis.tbtcore.game.Game.Mode;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -34,7 +34,7 @@ public class CommandTBT extends Command {
             if (args[0].toLowerCase().equals("queue")) {
                 if (args[1].toLowerCase().equals("1v1")) {
                     if (tbtplayer != null) {
-                        Main.gameQueue.addPlayer(tbtplayer, Mode.ONE);
+                        Main.gameQueue.addPlayer(tbtplayer, TBGame.class, "ONE");
                     }
                 }
             }

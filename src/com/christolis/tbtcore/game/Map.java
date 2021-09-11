@@ -113,6 +113,11 @@ public class Map {
         this.world = Bukkit.getServer().createWorld(
                 new WorldCreator(this.instanceFolder.getPath())
         );
+
+        // Disables animal and monster spawning.
+        this.world.setSpawnFlags(false, false);
+        this.world.setWeatherDuration(12000); // 10 minutes
+        this.world.setGameRuleValue("doDaylightCycle", "false");
     }
 
     public void shutdown() {
