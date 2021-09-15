@@ -1,4 +1,5 @@
 apply plugin: 'java'
+
 compileJava {
 	sourceCompatibility = '1.8'
 	targetCompatibility = '1.8'
@@ -9,27 +10,24 @@ configurations {
 }
 
 repositories {
-    jcenter()
 	mavenLocal()
 	mavenCentral()
+
+    maven {
+        name = "spigot-repository"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
 }
 
 dependencies {
-	compile files ('lib/spigot.jar')
-}
+    implementation group: "org.bukkit", name: "bukkit", version: "1.8.8-R0.1-SNAPSHOT"
 
-sourceSets {
-	main {
-		java {
-			srcDirs = ["./src"]
-		}
-	}
+    implementation files ('lib/Christolis-Scoreboard.jar')
+    extraLibs files ('lib/Christolis-Scoreboard.jar')
 }
 
 jar {
 	from {
 		configurations.extraLibs.collect {it.isDirectory() ? it : zipTree(it)}
 	}
-	from 'plugin.yml'
-    from 'config.yml'
 }
