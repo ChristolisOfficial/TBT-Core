@@ -1,17 +1,17 @@
 apply plugin: 'java'
 
 compileJava {
-	sourceCompatibility = '1.8'
-	targetCompatibility = '1.8'
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 }
 
 configurations {
-	extraLibs
+    extraLibs
 }
 
 repositories {
-	mavenLocal()
-	mavenCentral()
+    mavenLocal()
+    mavenCentral()
 
     maven {
         name = "spigot-repository"
@@ -27,7 +27,7 @@ dependencies {
 }
 
 jar {
-	from {
-		configurations.extraLibs.collect {it.isDirectory() ? it : zipTree(it)}
-	}
+    from {
+        configurations.extraLibs.collect {it.isDirectory() ? it : zipTree(it)}
+    }
 }
